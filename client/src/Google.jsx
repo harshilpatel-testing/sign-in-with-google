@@ -8,7 +8,7 @@ import { AuthContext } from './AuthContext';
 function Google() {
 
     const navigate = useNavigate();
-    const { setUser, setLoading } = useContext(AuthContext)
+    const { setUser, setLoading, loading } = useContext(AuthContext)
 
     const handleSuccess = async (credentialResponse) => {
         try {
@@ -37,7 +37,6 @@ function Google() {
                 })
             );
 
-
             // setLoading(false);
 
             setUser(data.user);
@@ -55,14 +54,23 @@ function Google() {
         <div>
             <Navbar />
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-                <GoogleLogin
-                    onSuccess={handleSuccess}
-                    onError={() => console.log("Login Failed")} type="standard"
-                    shape="pill"
-                    theme="filled_blue"
-                    size="large"
-                    text="signin_with"
-                     />
+                {
+                    loading && <p>Loading....</p>
+                }
+
+                {
+                    !loading && (
+                        <GoogleLogin
+                            onSuccess={handleSuccess}
+                            onError={() => console.log("Login Failed")} type="standard"
+                            shape="rectangular"
+                            theme="outline"
+                            size="large"
+                            text="continue_with"
+                            width={300}
+                        />
+                    )
+                }
             </div>
         </div>
     )

@@ -18,7 +18,8 @@ const AuthProvider = ({ children }) => {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${stored.token}`
                 },
-                body: JSON.stringify({ id: stored.id })
+                body: JSON.stringify({ id: stored.id }),
+                credentials: true
             });
 
             const jsonData = await response.json();

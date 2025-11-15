@@ -4,6 +4,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
+import Loading from './Loading';
 
 function Google() {
 
@@ -55,7 +56,7 @@ function Google() {
             <Navbar />
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
                 {
-                    loading && <p>Loading....</p>
+                    loading && <p> <Loading/>Loading....</p>
                 }
 
                 {
@@ -71,6 +72,7 @@ function Google() {
                         />
                     )
                 }
+
             </div>
         </div>
     )

@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
     res.json({ message: 'Welcome to the server!' });
 });
 
-app.use("/login", authRoutes);
+app.use("/auth", authRoutes);
 
 // Define port
 const PORT = process.env.PORT || 5000;

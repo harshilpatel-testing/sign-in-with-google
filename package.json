@@ -1,0 +1,26 @@
+{
+  "name": "sign-in-with-google",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "server": "cd server && npm start",
+    "client": "cd client && npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harshildiyora/sign-in-with-google.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/harshildiyora/sign-in-with-google/issues"
+  },
+  "homepage": "https://github.com/harshildiyora/sign-in-with-google#readme",
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

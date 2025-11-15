@@ -1,25 +1,46 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Navbar from './Navbar'
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from './AuthContext';
 
 function Google() {
 
+    const navigate = useNavigate();
+    const { setUser, setLoading  } = useContext(AuthContext)
+
     const handleSuccess = async (credentialResponse) => {
-        const decoded = jwtDecode(credentialResponse.credential);
-        console.log("Decoded JWT:", decoded);
+        try {
+            setLoading(true);
+            const decoded = jwtDecode(credentialResponse.credential);
+            console.log("Decoded JWT:", decoded);
 
-        // You can also send the token to your backend for further verification and processing
-        const response = await fetch('http://localhost:5000/login/google', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ token: credentialResponse.credential }),
-        });
+            // You can also send the token to your backend for further verification and processing
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/google`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ token: credentialResponse.credential }),
+            });
 
-        const data = await response.json();
-        console.log("Response from server:", data);
+            const data = await response.json();
+            console.log("Response from server:", data);
+
+            localStorage.setItem('user', JSON.stringify({id : data.user._id}))
+
+            // setLoading(false);
+
+            setUser(data.user);
+            setLoading(false);
+
+
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+
+        }
     }
 
     return (

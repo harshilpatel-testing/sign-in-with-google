@@ -55,7 +55,13 @@ function Google() {
         <div>
             <Navbar />
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-                <GoogleLogin onSuccess={handleSuccess} onError={() => console.log("Login Failed")} />
+                <GoogleLogin
+                    onSuccess={handleSuccess}
+                    onError={() => console.log("Login Failed")} type="standard"
+                    shape="rectangular"
+                    theme="outline"
+                    size="large"
+                    text="signin_with" />
             </div>
         </div>
     )

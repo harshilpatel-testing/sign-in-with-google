@@ -8,24 +8,18 @@ const AuthProvider = ({ children }) => {
 
     const checkAuth = async () => {
         try {
-            const data = localStorage.getItem("user");
-
-            if (!data) {
-
-                return;
-            }
-
             setLoading(true);
-            const user = JSON.parse(data);
-            console.log("Data get from localStorage : ", user);
+            const stored = JSON.parse(localStorage.getItem("user"));
+            if (!stored) return;
 
             const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/profile`, {
                 method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${stored.token}`
                 },
-                body: JSON.stringify({ id: user.id })
-            })
+                body: JSON.stringify({ id: stored.id })
+            });
 
             const jsonData = await response.json();
 

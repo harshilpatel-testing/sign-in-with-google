@@ -7,15 +7,16 @@ function Navbar() {
   const { user, setUser } = useContext(AuthContext);
 
   const logout = () => {
-    setUser(null);
     localStorage.removeItem("user");
+    setUser(null);
+
 
   }
 
   return (
     <div>
       <ul style={{ display: 'flex', listStyleType: 'none', gap: '20px' }}>
-       {user &&  <li><Link to="/">Home</Link></li>}
+        {user && <li><Link to="/">Home</Link></li>}
         {!user && <li><Link to="/login">Login</Link></li>}
         {user && <Link onClick={logout}><li >Logut</li></Link>}
       </ul>

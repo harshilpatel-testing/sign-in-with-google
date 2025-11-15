@@ -46,25 +46,18 @@ export const hadnleGoogleLogin = async (req, res) => {
 
 export const getProfile = async (req, res) => {
     try {
+        const authHeader = req.headers.authorization;
+        if (!authHeader) return res.status(401).json({ message: "No token" });
 
-        const { id } = req.body;
+        const token = authHeader.split(" ")[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        console.log(id, typeof id);
-        // id= id.toString();
+        const user = await User.findById(decoded.id);
+        if (!user) return res.status(404).json({ message: "User not found" });
 
-        const user = await User.findById(id);
+        return res.status(200).json({ user });
 
-        console.log(user);
-        
-        if (!user) {
-
-            return res.status(400).json({ message: "User not found." });
-        }
-
-        return res.status(200).json({ message: "User found", user });
     } catch (error) {
-        console.log(error);
-        
-        return res.status(500).json({ message: "Error in get profile", error })
+        return res.status(500).json({ message: "Error", error });
     }
-}
+};

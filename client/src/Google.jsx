@@ -8,7 +8,7 @@ import { AuthContext } from './AuthContext';
 function Google() {
 
     const navigate = useNavigate();
-    const { setUser, setLoading  } = useContext(AuthContext)
+    const { setUser, setLoading } = useContext(AuthContext)
 
     const handleSuccess = async (credentialResponse) => {
         try {
@@ -28,7 +28,14 @@ function Google() {
             const data = await response.json();
             console.log("Response from server:", data);
 
-            localStorage.setItem('user', JSON.stringify({id : data.user._id}))
+            localStorage.setItem(
+                "user",
+                JSON.stringify({
+                    id: data.user._id,
+                    token: data.token
+                })
+            );
+
 
             // setLoading(false);
 

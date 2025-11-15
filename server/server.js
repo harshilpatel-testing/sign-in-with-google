@@ -12,10 +12,7 @@ const app = express();
 
 // Middleware for parsing JSON bodies
 app.use(json());
-app.use(cors({
-    origin: [process.env.FRONTEND_URL, 'https://accounts.google.com'],
-    credentials: true
-}))
+app.use(cors())
 
 let authRoutes = router;
 

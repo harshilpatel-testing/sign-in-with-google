@@ -18,7 +18,7 @@ function Navbar() {
       <ul style={{ display: 'flex', listStyleType: 'none', gap: '20px' }}>
         {user && <li><Link to="/">Home</Link></li>}
         {!user && <li><Link to="/login">Login</Link></li>}
-        {user && <Link onClick={logout}><li >Logut</li></Link>}
+        {user && <Link onClick={logout}><li >Logout</li></Link>}
       </ul>
     </div>
   )

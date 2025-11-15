@@ -23,7 +23,7 @@ function Google() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ token: credentialResponse.credential }),
-                credentials: 'include'
+                // credentials: 'include'
             });
 
             const data = await response.json();

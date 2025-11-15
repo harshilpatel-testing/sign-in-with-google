@@ -12,7 +12,15 @@ const app = express();
 
 // Middleware for parsing JSON bodies
 app.use(json());
-app.use(cors());
+
+const allowedOrigins = [
+  "https://sign-in-with-google-ui.vercel.app",
+  "http://localhost:5173"  // useful for local dev
+];
+
+app.use(cors({
+    origin: "*"
+}));
 
 let authRoutes = router;
 

@@ -58,10 +58,11 @@ function Google() {
                 <GoogleLogin
                     onSuccess={handleSuccess}
                     onError={() => console.log("Login Failed")} type="standard"
-                    shape="rectangular"
-                    theme="outline"
+                    shape="pill"
+                    theme="filled_blue"
                     size="large"
-                    text="signin_with" />
+                    text="signin_with"
+                     />
             </div>
         </div>
     )
